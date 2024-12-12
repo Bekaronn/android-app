@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="error_general">Произошла ошибка</string>
+</resources>

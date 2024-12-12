@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:radius="8dp"
+    app:cardElevation="4dp"
+    tools:context=".NewsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Изображение новости -->
+        <ImageView
+            android:id="@+id/newsImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_news_placeholder" />
+
+        <!-- Заголовок новости -->
+        <TextView
+            android:id="@+id/newsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/newsImage"
+            android:layout_alignParentTop="true"
+            android:text="News Title"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+
+        <!-- Описание новости -->
+        <TextView
+            android:id="@+id/newsDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/newsImage"
+            android:layout_below="@id/newsTitle"
+            android:text="Description of the news..."
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Дата публикации -->
+        <TextView
+            android:id="@+id/newsPublishedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/newsImage"
+            android:layout_below="@id/newsDescription"
+            android:text="Published at: 2024-12-01"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Источник -->
+        <TextView
+            android:id="@+id/newsSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/newsImage"
+            android:layout_below="@id/newsPublishedAt"
+            android:text="Source: Example"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
