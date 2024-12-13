@@ -101,6 +101,6 @@ A prototype of the current news search page includes:
 - **RecyclerView** to display articles.
 - **Filters and Sort Options** at the top.
 
-![Main screen and search function](assets\images\studio64_3xUn9vZiqA.png)
+![Main screen and search function](/assets/images/studio64_3xUn9vZiqA.png)
 
-![second photo](assets\images\studio64_ZxLsShlVQp.png)
+![second photo](/assets/images/studio64_ZxLsShlVQp.png)
