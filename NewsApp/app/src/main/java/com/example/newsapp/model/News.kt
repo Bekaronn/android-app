@@ -27,25 +27,23 @@ data class News(
     val articles: List<Article>
 )
 
-val newsMapper: (NewsResponse) -> List<Article> = { response ->
-    response.articles.map { article ->
-        Article(
-            id = UUID.randomUUID().toString(),
-            source = article.source.let {
-                Source(
-                    id = it.id ?: UUID.randomUUID().toString(),
-                    name = it.name
-                )
-            } ?: Source(UUID.randomUUID().toString(), "Unknown Source"),
-            author = article.author ?: "Unknown Author",
-            title = article.title ?: "Untitled Article",
-            description = article.description ?: "No description available",
-            url = article.url ?: "No URL provided",
-            urlToImage = article.urlToImage ?: "No image available",
-            publishedAt = article.publishedAt ?: "No publish date available",
-            content = article.content ?: "No content available",
-            language = article.language ?: "Unknown Language",
-            sourceCountry = article.sourceCountry ?: "Unknown Country"
-        )
-    }
+val newsMapper: (Article) -> Article = { article ->
+    Article(
+        id = UUID.randomUUID().toString(),
+        source = article.source?.let {
+            Source(
+                id = it.id ?: UUID.randomUUID().toString(),
+                name = it.name
+            )
+        } ?: Source(UUID.randomUUID().toString(), "Unknown Source"),
+        author = article.author ?: "Unknown Author",
+        title = article.title ?: "Untitled Article",
+        description = article.description ?: "No description available",
+        url = article.url ?: "No URL provided",
+        urlToImage = article.urlToImage ?: "No image available",
+        publishedAt = article.publishedAt ?: "No publish date available",
+        content = article.content ?: "No content available",
+        language = article.language ?: "Unknown Language",
+        sourceCountry = article.sourceCountry ?: "Unknown Country"
+    )
 }

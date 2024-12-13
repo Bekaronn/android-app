@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.newsapp.api.NewsApi
+import com.example.newsapp.model.Article
 import com.example.newsapp.model.News
 import com.example.newsapp.model.NewsResponse
 import com.example.newsapp.model.newsMapper
@@ -33,8 +34,14 @@ class NewsViewModel(
                 val newsResponse = response.body()
 
                 if (newsResponse != null) {
-                    // Применяем маппинг к объекту NewsResponse и его списку articles
-                    _newsListUI.value = NewsListUI.Success(newsMapper(newsResponse)) // Используем маппер для конвертации
+                    val articles = newsResponse.articles
+                    if (articles.isNotEmpty()) {
+                        val mappedArticles = articles.map(newsMapper)
+                        _newsListUI.value = NewsListUI.Success(mappedArticles)
+                    } else {
+                        _newsListUI.value = NewsListUI.Empty
+                    }
+
                     _newsListUI.value = NewsListUI.Loading(false)
                 } else {
                     _newsListUI.value = NewsListUI.Empty
@@ -62,15 +69,17 @@ class NewsViewModel(
                     return
                 }
 
-                val newsList = response.body()
+                val newsResponse = response.body()
 
-                Log.d("searchNews", "Search result: $newsList")
+                Log.d("searchNews", "Search result: $newsResponse")
 
-                if (newsList != null) {
-                    _newsListUI.value = NewsListUI.Success(newsList.map(newsMapper))
+                if (newsResponse != null) {
+                    val mappedArticles = newsResponse.articles.map(newsMapper)
+                    _newsListUI.value = NewsListUI.Success(mappedArticles)
                 } else {
                     _newsListUI.value = NewsListUI.Empty
                 }
+
                 _newsListUI.value = NewsListUI.Loading(false)
             }
 
@@ -86,6 +95,6 @@ class NewsViewModel(
 sealed interface NewsListUI {
     data class Loading(val isLoading: Boolean) : NewsListUI
     data class Error(@StringRes val errorMessage: Int) : NewsListUI
-    data class Success(val newsList: List<News>) : NewsListUI
+    data class Success(val newsList: List<Article>) : NewsListUI
     data object Empty : NewsListUI
 }

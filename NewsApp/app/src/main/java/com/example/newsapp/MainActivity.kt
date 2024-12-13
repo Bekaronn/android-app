@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     private var adapter: NewsAdapter? = null
 
-    private val viewModel: AnimalViewModel by lazy {
-        NewsViewModelFactory().create(AnimalViewModel::class.java)
+    private val viewModel: NewsViewModel by lazy {
+        NewsViewModelFactory().create(NewsViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

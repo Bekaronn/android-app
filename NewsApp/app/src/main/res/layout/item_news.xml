@@ -7,7 +7,7 @@
     android:layout_margin="8dp"
     android:radius="8dp"
     app:cardElevation="4dp"
-    tools:context=".NewsActivity">
+    tools:context=".MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="12dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_news_placeholder" />
+            android:src="@android:drawable/ic_menu_report_image" />
 
         <!-- Заголовок новости -->
         <TextView
