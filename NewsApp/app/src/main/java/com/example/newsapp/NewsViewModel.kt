@@ -1,25 +1,32 @@
 package com.example.newsapp
 
-import android.util.Log
+import AppDatabase
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.newsapp.api.NewsApi
 import com.example.newsapp.model.Article
-import com.example.newsapp.model.News
 import com.example.newsapp.model.NewsResponse
 import com.example.newsapp.model.newsMapper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class NewsViewModel(
-    private val client: NewsApi
+    private val client: NewsApi,
+    private val database: AppDatabase // Подключаем базу данных
 ) : ViewModel() {
 
     private val _newsListUI = MutableLiveData<NewsListUI>()
     val newsListUI: LiveData<NewsListUI> = _newsListUI
+
+    private val _savedArticles = MutableLiveData<List<Article>>()
+    val savedArticles: LiveData<List<Article>> = _savedArticles
 
     fun fetchNewsList() {
         _newsListUI.value = NewsListUI.Loading(true)
@@ -54,7 +61,6 @@ class NewsViewModel(
         })
     }
 
-
     fun searchNews(query: String) {
         if (query.isEmpty()) {
             return
@@ -71,8 +77,6 @@ class NewsViewModel(
 
                 val newsResponse = response.body()
 
-                Log.d("searchNews", "Search result: $newsResponse")
-
                 if (newsResponse != null) {
                     val mappedArticles = newsResponse.articles.map(newsMapper)
                     _newsListUI.value = NewsListUI.Success(mappedArticles)
@@ -84,11 +88,35 @@ class NewsViewModel(
             }
 
             override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
-                Log.e("searchNews", "Request failed: ${t.message}", t)
                 _newsListUI.value = NewsListUI.Error(R.string.error_general)
                 _newsListUI.value = NewsListUI.Loading(false)
             }
         })
+    }
+
+    fun saveArticle(article: Article) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                database.articleDao().insertArticle(article)
+            }
+        }
+    }
+
+    fun deleteArticle(article: Article) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                database.articleDao().deleteArticle(article)
+            }
+        }
+    }
+
+    fun loadSavedArticles() {
+        viewModelScope.launch {
+            val articles: List<com.example.newsapp.model.Article> = withContext(Dispatchers.IO) {
+                database.articleDao().getAllArticles()
+            }
+            _savedArticles.postValue(articles)
+        }
     }
 }
 

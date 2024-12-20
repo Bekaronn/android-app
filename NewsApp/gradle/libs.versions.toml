@@ -17,6 +17,8 @@ glide = "4.16.0"
 okhttp = "4.12.0"
 fragment = "1.6.1"
 lifecycleVersion = "2.8.7"
+navigationFragmentKtx = "2.8.5"
+navigationUiKtx = "2.8.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,8 +43,14 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 lifecycleViewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleVersion"}
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+room-runtime = { module = "androidx.room:room-runtime", version = "2.5.0" }
+room-ktx = { module = "androidx.room:room-ktx", version = "2.5.0" }
+room-compiler = { module = "androidx.room:room-compiler", version = "2.5.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 

@@ -73,6 +73,19 @@
             android:textColor="@android:color/black"
             android:textSize="12sp"
             android:layout_marginTop="4dp" />
+
+        <!-- Кнопка сохранения -->
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/newsImage"
+            android:layout_below="@id/newsSource"
+            android:layout_marginTop="12dp"
+            android:padding="8dp"
+            android:backgroundTint="@color/purple_500"
+            android:text="Save"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
