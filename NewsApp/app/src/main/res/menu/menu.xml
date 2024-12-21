@@ -3,10 +3,14 @@
 
     <item
         android:id="@+id/news_list"
-        android:title="News" />
+        android:icon="@drawable/ic_news"
+        android:title="News"
+        android:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/saved_news"
-        android:title="Saved" />
+        android:icon="@drawable/ic_saved"
+        android:title="Saved"
+        android:showAsAction="ifRoom|withText" />
 
 </menu>

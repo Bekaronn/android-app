@@ -46,7 +46,9 @@ class NewsSavedFragment : Fragment() {
                 // nothing to do
             },
             onChangeFavouriteState = { article, isFavourite ->
-
+                if (isFavourite) {
+                    viewModel.removeFromFavourite(article)
+                }
             }
         )
 
@@ -65,6 +67,9 @@ class NewsSavedFragment : Fragment() {
                 is NewsDetailsUI.Success -> {
                     Log.d("NewsSavedFragment", "News list fetched successfully, size: ${state.newsList.size}")
                     adapter?.submitList(state.newsList)
+                }
+                is NewsDetailsUI.NewsRemoved -> {
+                    adapter?.removeArticle(state.article)
                 }
                 else -> {
                     Log.d("NewsSavedFragment", "State not handled: $state")

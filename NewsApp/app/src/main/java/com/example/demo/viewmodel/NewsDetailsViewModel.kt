@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demo.model.dao.ArticleDao
 import com.example.demo.model.entity.Article
+import com.example.demo.model.entity.ArticleEntity
 import com.example.demo.model.entity.articleEntityMapper
 import kotlinx.coroutines.launch
 
@@ -33,8 +34,23 @@ class NewsDetailsViewModel(
             }
         }
     }
+
+    fun removeFromFavourite(article: Article) {
+        viewModelScope.launch {
+            try {
+                newsDao.delete(ArticleEntity.from(article))
+
+                _newsDetailsUI.value = NewsDetailsUI.NewsRemoved(article.copy(isFavourite = false))
+            } catch (e: Exception) {
+                Log.e("NewsDetailsViewModel", "Error removing article from favourites: ${e.message}")
+                _newsDetailsUI.value = NewsDetailsUI.NewsChangeError
+            }
+        }
+    }
 }
 
 sealed interface NewsDetailsUI {
     data class Success(val newsList: List<Article>) : NewsDetailsUI
+    data class NewsRemoved(val article: Article) : NewsDetailsUI
+    object NewsChangeError : NewsDetailsUI
 }

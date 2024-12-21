@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:radius="8dp"
-    app:cardElevation="4dp">
+    android:radius="12dp"
+    app:cardElevation="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:padding="16dp">
 
-        <!-- Изображение новости -->
         <ImageView
             android:id="@+id/newsImage"
             android:layout_width="100dp"
@@ -25,69 +23,72 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Заголовок новости -->
         <TextView
             android:id="@+id/newsTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:text="News Title"
+            android:text="Заголовок новости"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/newsImage"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Кнопка для сохранения -->
-        <ImageButton
-            android:id="@+id/saveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:contentDescription="@string/save"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Описание новости -->
         <TextView
             android:id="@+id/newsDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Description of the news..."
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Описание новости..."
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/newsImage"
             app:layout_constraintTop_toBottomOf="@id/newsTitle" />
 
-        <!-- Дата публикации -->
         <TextView
             android:id="@+id/newsPublishedAt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Published at: 2024-12-01"
+            android:layout_marginStart="8dp"
+            android:text="20 ноября 2024, 00:00"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/newsImage"
             app:layout_constraintTop_toBottomOf="@id/newsDescription" />
 
-        <!-- Источник -->
         <TextView
             android:id="@+id/newsSource"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Source: Example"
+            android:layout_marginStart="8dp"
+            android:text="Источник: Example"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/newsImage"
             app:layout_constraintTop_toBottomOf="@id/newsPublishedAt" />
+
+        <ImageButton
+            android:id="@+id/saveButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Добавить в закладки"
+            android:src="@drawable/bookmark_icon"
+            android:tint="@android:color/holo_red_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
